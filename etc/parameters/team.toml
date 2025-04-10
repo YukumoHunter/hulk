@@ -1,4 +1,5 @@
-team_number = 8
+team_number = 24
+hostname_prefix = ""
 
 [[naos]]
 hostname = "sam"

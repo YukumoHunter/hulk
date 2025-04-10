@@ -37,6 +37,7 @@ pub const NETWORK_POSSIBLE_VALUES: &[&str] = &[
     "SPL_E",
     "SPL_F",
     "SPL_HULKs",
+    "DNT_5G",
 ];
 
 pub fn parse_network(network: &str) -> Result<Network> {
@@ -49,6 +50,7 @@ pub fn parse_network(network: &str) -> Result<Network> {
         "SPL_E" => Ok(Network::SplE),
         "SPL_F" => Ok(Network::SplF),
         "SPL_HULKs" => Ok(Network::SplHulks),
+        "DNT_5G" => Ok(Network::Dnt5G),
         _ => bail!("unexpected network"),
     }
 }
