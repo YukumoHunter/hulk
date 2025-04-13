@@ -24,18 +24,17 @@ use parameters::{
 };
 use semver::Version;
 use serde::Deserialize;
-use serde_json::{from_slice, from_str, to_string_pretty, to_value, Value};
+use serde_json::{from_str, to_string_pretty, to_value, Value};
 use tempfile::{tempdir, TempDir};
 use tokio::{
     fs::{
         create_dir_all, read_dir, read_link, read_to_string, remove_dir_all, remove_file, rename,
         set_permissions, symlink, try_exists, write, File,
     },
-    io::AsyncReadExt,
     process::Command,
 };
 
-use constants::{Team, OS_IS_NOT_LINUX, SDK_VERSION};
+use constants::{Team, OS_IS_NOT_LINUX, SDK_VERSION, TEAM};
 use spl_network_messages::PlayerNumber;
 use types::hardware::Ids;
 
@@ -424,14 +423,7 @@ impl Repository {
     }
 
     pub async fn get_configured_team(&self) -> Result<Team> {
-        let team_toml = self.root.join("etc/parameters/team.toml");
-        let mut team_file = File::open(&team_toml)
-            .await
-            .wrap_err_with(|| format!("failed to open {}", team_toml.display()))?;
-        let mut contents = vec![];
-        team_file.read_to_end(&mut contents).await?;
-        let team: Team = from_slice(&contents).wrap_err("failed to parse team.toml")?;
-        Ok(team)
+        Ok(TEAM.clone())
     }
 
     pub async fn get_configured_locations(&self) -> Result<BTreeMap<String, Option<String>>> {

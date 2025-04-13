@@ -10,14 +10,14 @@ pub const OS_RELEASE_PATH: &str = "/etc/os-release";
 pub const OS_VERSION: &str = "7.5.7";
 pub const SDK_VERSION: &str = "7.5.7";
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct Team {
     pub team_number: u8,
     pub hostname_prefix: String,
     pub naos: Vec<Nao>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct Nao {
     pub number: u8,
     pub body_id: String,
