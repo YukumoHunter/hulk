@@ -54,7 +54,7 @@ pub async fn download_and_install(version: &str, data_home: impl AsRef<Path>) ->
 
 async fn download_and_prepare(version: &str, sdk_home: impl AsRef<Path>) -> Result<PathBuf> {
     let downloads_directory = sdk_home.as_ref().join("downloads");
-    let installer_name = format!("HULKs-OS-{ARCH}-toolchain-{version}.sh");
+    let installer_name = format!("HULKs-DNT-OS-{ARCH}-toolchain-{version}.sh");
     let installer_path = downloads_directory.join(&installer_name);
     let download_path = installer_path.with_extension("tmp");
 
@@ -66,8 +66,9 @@ async fn download_and_prepare(version: &str, sdk_home: impl AsRef<Path>) -> Resu
         .await
         .wrap_err("failed to create download directory")?;
 
-    let url =
-        format!("https://github.com/HULKs/meta-nao/releases/download/{version}/{installer_name}");
+    let url = format!(
+        "https://github.com/YukumoHunter/meta-nao/releases/download/{version}/{installer_name}"
+    );
     download(url, &download_path)
         .await
         .wrap_err("failed to download SDK")?;
