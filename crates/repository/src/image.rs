@@ -14,7 +14,7 @@ use crate::download::download;
 pub async fn download_image(version: &str, data_home: impl AsRef<Path>) -> Result<PathBuf> {
     let data_home = data_home.as_ref();
     let downloads_directory = data_home.join("image/");
-    let image_name = format!("nao-image-HULKs-OS-{version}.ext3.gz.opn");
+    let image_name = format!("nao-image-HULKs-DNT-OS-{version}.ext3.gz.opn");
     let image_path = downloads_directory.join(&image_name);
     let download_path = image_path.with_extension("tmp");
 
@@ -26,7 +26,9 @@ pub async fn download_image(version: &str, data_home: impl AsRef<Path>) -> Resul
         .await
         .wrap_err("failed to create download directory")?;
 
-    let url = format!("https://github.com/HULKs/meta-nao/releases/download/{version}/{image_name}");
+    let url = format!(
+        "https://github.com/YukumoHunter/meta-nao/releases/download/{version}/{image_name}"
+    );
     download(url, &download_path)
         .await
         .wrap_err("failed to download image")?;
